@@ -14,7 +14,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'sqlite3'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
-gem 'sshkit', '1.4.0'
+gem 'sshkit', '1.9.0'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
