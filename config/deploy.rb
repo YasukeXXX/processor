@@ -3,6 +3,7 @@ lock "3.8.2"
 
 set :application, "rails_app"
 set :repo_url, "git@github.com:YasukeXXX/processor.git"
+set :branch, 'capistrano'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
