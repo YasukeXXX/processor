@@ -10,6 +10,10 @@ set :repo_url, "git@github.com:YasukeXXX/processor.git"
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/var/www/rails_application"
 
+set :rbenv_ruby, '2.4.1'
+set :rbenv_custom_path, '~/.rbenv'
+set :rbenv_map_bins, %w{rake gem bundle ruby rails}
+
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
 
