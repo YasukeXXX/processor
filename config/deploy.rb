@@ -5,15 +5,20 @@ set :application, "rails_app"
 set :repo_url, "git@github.com:YasukeXXX/processor.git"
 set :branch, 'capistrano'
 
+set :bundle_flags, "--quiet"
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/var/www/rails_application"
 
-set :rbenv_ruby, '2.4.1'
+set :rbenv_ruby, '2.0.0p648'
+set :rbenv_path, '~/.rbenv'
 set :rbenv_custom_path, '~/.rbenv'
+set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
+set :rbenv_roles, :all
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
