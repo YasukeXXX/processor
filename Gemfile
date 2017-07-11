@@ -26,6 +26,7 @@ group :development, :test do
   gem 'rspec-rails'                                                                               
   gem 'rubocop', require: false 
   gem 'selenium-webdriver', '3.4.3'
+  gem 'sqlite3'
 end
 
 group :development do
@@ -37,6 +38,11 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
 end
+
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+end 
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
