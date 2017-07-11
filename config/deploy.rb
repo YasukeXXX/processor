@@ -3,6 +3,9 @@ lock "3.8.2"
 
 set :application, "rails_app"
 set :repo_url, "git@github.com:YasukeXXX/processor.git"
+set :branch, 'capistrano'
+
+set :bundle_flags, "--quiet"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -10,9 +13,14 @@ set :repo_url, "git@github.com:YasukeXXX/processor.git"
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/var/www/rails_application"
 
-set :rbenv_ruby, '2.4.1'
+set :rbenv_ruby, '2.0.0p648'
+set :rbenv_path, '~/.rbenv'
 set :rbenv_custom_path, '~/.rbenv'
+set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
+set :rbenv_roles, :all
+
+set :shared_path, '/var/www/rails_application'
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
@@ -25,7 +33,7 @@ set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 # set :pty, true
 
 # Default value for :linked_files is []
-# append :linked_files, "config/database.yml", "config/secrets.yml"
+append :linked_files, "config/database.yml", "config/secrets.yml"
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
@@ -38,3 +46,24 @@ set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+
+namespace :deploy do
+  desc 'Restart application'
+  task :restart do
+    invoke 'unicorn:start'
+  end
+
+  desc 'Upload database.yml'
+  task :upload do
+    on roles(:app) do |host|
+      if test "[ ! -d #{shared_path}/config ]"
+        execute "mkdir -p #{shared_path}/config"
+      end
+      upload!('config/database.yml', "#{shared_path}/config/database.yml")
+      upload!('config/secrets.yml', "#{shared_path}/config/secrets.yml")
+    end
+  end
+
+  before :starting, 'deploy:upload'
+  after :finishing, 'deploy:cleanup'
+end
