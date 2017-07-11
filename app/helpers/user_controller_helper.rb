@@ -1,0 +1,2 @@
+module UserControllerHelper
+end
