@@ -7,8 +7,6 @@ server "192.168.33.11", user: "developer", roles: %w{app db web}, ssh_options: {
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 
-
-
 # role-based syntax
 # ==================
 
@@ -21,9 +19,7 @@ server "192.168.33.11", user: "developer", roles: %w{app db web}, ssh_options: {
 # role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value
 role :app,  %w{developer@192.168.33.11}
 role :web,  %w{developer@192.168.33.11}
-role :db,  %w{developer@192.168.33.11}
-
-
+role :db, %w{developer@192.168.33.11}
 
 # Configuration
 # =============
@@ -33,8 +29,6 @@ role :db,  %w{developer@192.168.33.11}
 # http://capistranorb.com/documentation/getting-started/configuration/
 # Feel free to add new variables to customise your setup.
 
-
-
 # Custom SSH Options
 # ==================
 # You may pass any option but keep in mind that net/ssh understands a
@@ -43,11 +37,11 @@ role :db,  %w{developer@192.168.33.11}
 #
 # Global options
 # --------------
- set :ssh_options, {
-   keys: %w(~/.ssh/id_rsa),
-   forward_agent: true,
-#    auth_methods: %w(password)
- }
+set :ssh_options, {
+  keys: %w(~/.ssh/id_rsa),
+  forward_agent: true,
+  #    auth_methods: %w(password)
+}
 #
 # The server-based syntax can be used to override options:
 # ------------------------------------

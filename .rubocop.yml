@@ -1,0 +1,33 @@
+# 自動生成されるものはチェック対象から除外する
+AllCops:
+  Exclude:
+    - "vendor/**/*" # rubocop config/default.yml
+    - "Gemfile"
+    - "Gemfile.lock"
+    - "db/schema.rb"
+    - "node_modules/**/*"
+  DisplayCopNames: true
+
+Layout:
+  Enabled: true
+
+Metrics:
+  Enabled: false
+
+Performance:
+  Enabled: false
+
+Rails:
+  Enabled: false
+
+Security:
+  Enabled: false
+
+Lint:
+  Enabled: false
+
+Bundler:
+  Enabled: false
+
+Style:
+  Enabled: false

@@ -31,8 +31,6 @@ role :db,  %w{root@192.168.33.11}
 # http://capistranorb.com/documentation/getting-started/configuration/
 # Feel free to add new variables to customise your setup.
 
-
-
 # Custom SSH Options
 # ==================
 # You may pass any option but keep in mind that net/ssh understands a
@@ -41,11 +39,11 @@ role :db,  %w{root@192.168.33.11}
 #
 # Global options
 # --------------
- set :ssh_options, {
-   keys: %w(~/.ssh/id_rsa),
-   forward_agent: false,
-   auth_methods: %w(password)
- }
+set :ssh_options, {
+  keys: %w(~/.ssh/id_rsa),
+  forward_agent: false,
+  auth_methods: %w(password)
+}
 #
 # The server-based syntax can be used to override options:
 # ------------------------------------
