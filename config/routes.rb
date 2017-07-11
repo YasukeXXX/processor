@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  get 'users/new'
+
+  get 'users/edit'
+
+  get 'users/show'
+
+  get 'user/new'
+
+  get 'user/edit'
+
+  get 'user/show'
+
   get 'user_controller/new'
 
   get 'user_controller/create'
