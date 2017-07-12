@@ -31,3 +31,6 @@ Bundler:
 
 Style:
   Enabled: false
+
+Style/FrozenStringLiteralComment:
+    Enabled: false

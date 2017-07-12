@@ -1,11 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  discribe '#valid' do
-
+  describe '#valid' do
   end
 
-  discribe '#invalid' do
-
+  describe '#invalid' do
   end
 end
