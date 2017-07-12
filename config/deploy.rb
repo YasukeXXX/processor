@@ -3,7 +3,7 @@ lock "3.8.2"
 
 set :application, "rails_app"
 set :repo_url, "git@github.com:YasukeXXX/processor.git"
-set :branch, 'capistrano'
+set :branch, 'master'
 
 set :bundle_flags, "--quiet"
 
@@ -30,10 +30,10 @@ set :shared_path, '/var/www/rails_application'
 # set :format_options, command_output: true, log_file: "log/capistrano.log", color: :auto, truncate: :auto
 
 # Default value for :pty is false
-# set :pty, true
+set :pty, true
 
 # Default value for :linked_files is []
-append :linked_files, "config/database.yml", "config/secrets.yml"
+append :linked_files, "tmp/config/database.yml", "tmp/config/secrets.yml"
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
