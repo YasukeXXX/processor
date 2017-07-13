@@ -6,4 +6,4 @@ machine:
       2.4.1
 test:
   override:
-    - bundle exec haml-lint
+    - bundle exec haml-lint -c .halm-lint.yml
