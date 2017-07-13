@@ -62,6 +62,10 @@ GEM
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
+    capistrano3-puma (3.1.1)
+      capistrano (~> 3.7)
+      capistrano-bundler
+      puma (~> 3.4)
     capybara (2.14.4)
       addressable
       mime-types (>= 1.16)
@@ -281,6 +285,7 @@ DEPENDENCIES
   capistrano (~> 3.6)
   capistrano-rails (~> 1.1)
   capistrano-rvm
+  capistrano3-puma
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
   erb2haml
