@@ -1,0 +1,130 @@
+# Based on config/default.yml from brigade/haml-lint@1635c0
+#
+# Whether to ignore frontmatter at the beginning of HAML documents for
+# frameworks such as Jekyll/Middleman
+skip_frontmatter: false
+
+linters:
+  AlignmentTabs:
+    enabled: true
+
+  AltText:
+    enabled: false
+
+  ClassAttributeWithStaticValue:
+    enabled: true
+
+  ClassesBeforeIds:
+    enabled: true
+
+  ConsecutiveComments:
+    enabled: true
+    max_consecutive: 1
+
+  ConsecutiveSilentScripts:
+    enabled: true
+
+  EmptyObjectReference:
+    enabled: true
+
+  EmptyScript:
+    enabled: true
+
+  FinalNewline:
+    enabled: true
+    present: true
+
+  HtmlAttributes:
+    enabled: true
+
+  IdNames:
+    enabled: true
+    style: lisp_case
+
+  ImplicitDiv:
+    enabled: true
+
+  Indentation:
+    enabled: true
+    character: space # or tab
+    width: 2 # ignored if character == tab
+
+  InlineStyles:
+    enabled: false
+
+  InstanceVariables:
+    enabled: true
+    file_types: partials
+    matchers:
+      all: .*
+      partials: \A_.*\.haml\z
+
+  LeadingCommentSpace:
+    enabled: true
+
+  LineLength:
+    enabled: true
+    max: 250
+
+  MultilinePipe:
+    enabled: true
+
+  MultilineScript:
+    enabled: true
+
+  ObjectReferenceAttributes:
+    enabled: true
+
+  RepeatedId:
+    enabled: true
+    severity: error
+
+  RuboCop:
+    enabled: false
+    # These cops are incredibly noisy when it comes to HAML templates, so we
+    # ignore them.
+    ignored_cops:
+      - Lint/BlockAlignment
+      - Lint/EndAlignment
+      - Lint/Void
+      - Layout/AlignParameters
+      - Layout/IndentationWidth
+      - Layout/TrailingBlankLines
+      - Layout/TrailingWhitespace
+      - Metrics/BlockLength
+      - Metrics/LineLength
+      - Style/BlockNesting
+      - Style/ElseAlignment
+      - Style/EndOfLine
+      - Style/FileName
+      - Style/FinalNewline
+      - Style/FrozenStringLiteralComment
+      - Style/IfUnlessModifier
+      - Style/Next
+      - Style/WhileUntilModifier
+      - Style/FrozenStringLiteralComment
+
+  RubyComments:
+    enabled: true
+
+  SpaceBeforeScript:
+    enabled: true
+
+  SpaceInsideHashAttributes:
+    enabled: true
+    style: space
+
+  TagName:
+    enabled: true
+
+  TrailingWhitespace:
+    enabled: true
+
+  UnnecessaryInterpolation:
+    enabled: true
+
+  UnnecessaryStringOutput:
+    enabled: true
+
+  ViewLength:
+    enable: true
