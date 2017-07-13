@@ -3,7 +3,8 @@
   %head
     %meta{ :content => "text/html; charset=UTF-8",
       "http-equiv" => "Content-Type" }
-    %title Processer
+    %title
+      = yield(:title)
     = csrf_meta_tags
     = stylesheet_link_tag(href: 'application',
       media: 'all',
