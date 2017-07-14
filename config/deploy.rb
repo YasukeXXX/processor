@@ -30,8 +30,10 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 # set :keep_releases, 5
 
 namespace :deploy do
-  desc :restart do
-    Rake::Task["puma:restart"].reenable
+  desc 'restart puma'
+  task :restart do
+    Rake::Task["puma:stop"]
+    Rake::Task["puma:start"]
   end
 
   desc 'Upload database.yml'
@@ -40,13 +42,14 @@ namespace :deploy do
       if test "[ ! -d #{shared_path}/config ]"
         execute "mkdir -p #{shared_path}/config"
       end
-      upload!('config/database.yml', "#{shared_path}/config/database.yml")
-      upload!('config/secrets.yml', "#{shared_path}/config/secrets.yml")
+      upload!('tmp/config/database.yml', "#{shared_path}/config/database.yml")
+      upload!('tmp/config/secrets.yml', "#{shared_path}/config/secrets.yml")
     end
   end
 
   before :starting, 'deploy:upload'
   after :finishing, 'deploy:cleanup'
+  after :finishing, 'deploy:restart'
 end
 
 # namespace :puma do
