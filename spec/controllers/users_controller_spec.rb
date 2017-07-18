@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
+  let(:user) { create(:user) }
   describe "#new" do
     it "returns http success" do
       get :new
@@ -10,14 +11,14 @@ RSpec.describe UsersController, type: :controller do
 
   describe "#edit" do
     it "returns http success" do
-      get :edit
+      get :edit, params: { id: user.id }
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "#show" do
     it "returns http success" do
-      get :show
+      get :show, params: { id: user.id }
       expect(response).to have_http_status(:success)
     end
   end
