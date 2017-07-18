@@ -6,9 +6,9 @@
     %title
       = yield(:title)
     = csrf_meta_tags
-    = stylesheet_link_tag(href: 'application',
-      media: 'all',
-      'data-turbolinks-track': 'reload')
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
   %body
-    = yield
+    = render 'layouts/header'
+    .ui.container
+      = yield
