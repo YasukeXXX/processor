@@ -37,5 +37,12 @@ RSpec.describe "Sessions", type: :request do
   end
 
   describe '#destroy' do
+    subject { Proc.new { delete logout_path, params: { id: user.id } } }
+
+    before do
+      login_as user
+    end
+
+    it { is_expected.to change { session[:user_id] }.from(user.id).to(nil) }
   end
 end

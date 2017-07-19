@@ -27,7 +27,14 @@ require 'factory_girl_rails'
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
 
+module SessionsHelper
+  def login_as(user)
+    post login_path, params: { session: { email: user.email, password: user.password } }
+  end
+end
+
 RSpec.configure do |config|
+  config.include SessionsHelper
   config.include FactoryGirl::Syntax::Methods
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   # config.fixture_path = "#{::Rails.root}/spec/fixtures"
