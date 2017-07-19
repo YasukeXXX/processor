@@ -27,6 +27,7 @@ group :development, :test do
   gem 'factory_girl_rails', require: false
   gem 'haml-lint', require: false
   gem 'pry-rails'
+  gem 'rails-controller-testing'
   gem 'rspec-rails'
   gem 'rubocop', require: false
   gem 'selenium-webdriver', '3.4.3'

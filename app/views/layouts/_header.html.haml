@@ -4,5 +4,9 @@
       %h3.header.item
         = link_to 'processor', root_path
       .right.menu
-        = link_to 'Login', login_path, class: 'item'
-        = link_to 'Sign up', signup_path, class: 'item'
+        - if logged_in?
+          = link_to current_user.name, current_user, class: 'item'
+          = link_to 'Setting', '#', class: 'item'
+        - else
+          = link_to 'Login', login_path, class: 'item'
+          = link_to 'Sign up', signup_path, class: 'item'
