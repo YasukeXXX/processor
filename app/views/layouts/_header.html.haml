@@ -4,7 +4,5 @@
       %h3.header.item
         = link_to 'processor', root_path
       .right.menu
-        %a.item
-          Login
-        %a.item
-          Sign up
+        = link_to 'Login', login_path, class: 'item'
+        = link_to 'Sign up', signup_path, class: 'item'
