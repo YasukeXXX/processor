@@ -9,9 +9,10 @@
     = f.label :password
     = f.password_field :password
 
-  .field.ui.checkbox
-    = f.label :remember_me, 'Remember me on this computer'
-    = f.check_box :remember_me
+  .field
+    .ui.checkbox
+      = f.check_box :remember_me
+      = f.label :remember_me, 'Remember me on this computer'
 
   .field
     = f.submit "Login", class: 'ui submit button'
