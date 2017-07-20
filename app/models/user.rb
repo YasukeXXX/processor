@@ -6,4 +6,6 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false },
                     email_format: true
   validates :password, presence: true, length: { minimum: 6 }
+
+  has_one :account_activation
 end
