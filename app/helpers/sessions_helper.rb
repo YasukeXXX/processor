@@ -4,7 +4,6 @@ module SessionsHelper
   end
 
   def current_user
-    remember_verifier = RememberVerifier.new type: :remember
     if user_id = session[:user_id]
       @current_user ||= User.find_by(id: user_id)
     elsif user_id = remember_verifier.verify(cookies[:remember_me])
@@ -26,11 +25,16 @@ module SessionsHelper
   end
 
   def remember(user)
-    remember_verifier = RememberVerifier.new type: :remember
     cookies.permanent[:remember_me] = remember_verifier.generate_token(user.id)
   end
 
   def forget(user)
     cookies.delete(:remember_me)
+  end
+
+  private
+
+  def remember_verifier
+    @remember_verifier ||= Verifier.new type: :remember
   end
 end

@@ -1,4 +1,4 @@
-class RememberVerifier
+class Verifier
   def initialize(type: :remember, expiration_date: 30.years)
     @verifier = verifier(type)
     @expiration_date = expiration_date
