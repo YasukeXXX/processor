@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:name) { 'example' }
-  let(:email) { 'ex@am.ple' }
+  let(:email) { 'email@example.com' }
   let(:password) { 'password' }
   let(:password_confirmation) { 'password' }
   let(:user) do
