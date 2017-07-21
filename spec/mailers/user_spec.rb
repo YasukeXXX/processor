@@ -4,9 +4,6 @@ RSpec.describe UserMailer, type: :mailer do
   let(:user) { create(:user) }
   describe '#account_activation' do
     let(:mail) { UserMailer.account_activation(user) }
-    before do
-      user.account_activation = AccountActivation.new
-    end
 
     subject { mail.body.encoded }
 
