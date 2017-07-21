@@ -11,7 +11,7 @@ RSpec.describe "Users", type: :request do
 
   describe '#create' do
     let(:name) { 'example' }
-    let(:email) { 'ex@am.ple' }
+    let(:email) { 'example@example.com' }
     let(:password) { 'password' }
     let(:password_confirmation) { 'password' }
     let(:user) do
@@ -19,22 +19,43 @@ RSpec.describe "Users", type: :request do
                    password_confirmation: password_confirmation)
     end
 
-    before do
-      post signup_path, params: { user: { name: user.name, email: user.email,
-                                          password: user.password,
-                                          password_confirmation: user.password_confirmation } }
+    describe 'Default' do
+      before do
+        post signup_path, params: { user: { name: user.name, email: user.email,
+                                            password: user.password,
+                                            password_confirmation: user.password_confirmation } }
+      end
+
+      context 'with correct user info' do
+        it { expect(flash[:info]).not_to be_nil }
+        it { expect(session[:user_id]).to be_nil }
+      end
+
+      context 'with wrong email' do
+        let(:email) { 'aaa' }
+
+        it { expect(flash[:success]).to be_nil }
+        it { expect(session[:user_id]).to be_nil }
+      end
     end
 
-    context 'with correct user info' do
-      it { expect(flash[:info]).not_to be_nil }
-      it { expect(session[:user_id]).to be_nil }
-    end
+    describe 'Mailer' do
+      subject do
+        Proc.new do
+          post signup_path, params: { user: { name: user.name, email: user.email,
+                                              password: user.password,
+                                              password_confirmation: user.password_confirmation } }
+        end
+      end
 
-    context 'with wrong email' do
-      let(:email) { 'aaa' }
+      context 'with correct user info' do
+        it { is_expected.to change { ActionMailer::Base.deliveries.count }.by(1) }
+      end
 
-      it { expect(flash[:success]).to be_nil }
-      it { expect(session[:user_id]).to be_nil }
+      context 'with wrong user info' do
+        let(:email) { 'aaa' }
+        it { is_expected.not_to change { ActionMailer::Base.deliveries.count } }
+      end
     end
   end
 
