@@ -153,4 +153,31 @@ RSpec.describe "Users", type: :request do
     it { is_expected.to render_template 'show' }
     it { expect(response.body).to match /#{user.name}/ }
   end
+
+  describe '#index' do
+    let(:user) { create(:user, :activated) }
+    let(:admin_user) { create(:user, :admin, :activated) }
+    before do
+      login_as login_user
+      get users_path
+    end
+
+    subject { response }
+
+    context 'when not logged in' do
+      let(:login_user) { nil }
+      it { expect(response).to redirect_to login_path }
+    end
+
+    context 'when logged in as user' do
+      let(:login_user) { user }
+      it { is_expected.to render_template 'index' }
+    end
+
+    context 'when logged in as admin user' do
+      let(:login_user) { admin_user }
+      it { is_expected.to render_template 'index' }
+      it { expect(response.body).to include 'delete' }
+    end
+  end
 end

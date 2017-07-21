@@ -12,4 +12,8 @@ class User < ApplicationRecord
   def activate
     account_activation.update_attributes(activated: true, activated_at: Time.zone.now)
   end
+
+  def self.activated_all
+    User.where(id: AccountActivation.where(activated: true).ids)
+  end
 end
