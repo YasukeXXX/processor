@@ -5,10 +5,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if @user.save
-      flash[:success] = "Welcome!"
-      login @user
-      redirect_to @user
+    user_with_sending_mail = UserWithSendingMail.new(@user)
+    if user_with_sending_mail.save
+      flash[:info] = "Please check your email to activate your account!"
+      redirect_to root_url
     else
       render 'new'
     end

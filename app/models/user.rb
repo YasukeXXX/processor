@@ -7,5 +7,9 @@ class User < ApplicationRecord
                     email_format: true
   validates :password, presence: true, length: { minimum: 6 }
 
-  has_one :account_activation
+  has_one :account_activation, dependent: :destroy
+
+  def activate
+    account_activation.update_attributes(activated: true, activated_at: Time.zone.now)
+  end
 end
