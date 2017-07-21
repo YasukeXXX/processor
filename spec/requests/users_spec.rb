@@ -26,8 +26,8 @@ RSpec.describe "Users", type: :request do
     end
 
     context 'with correct user info' do
-      it { expect(flash[:success]).not_to be_nil }
-      it { expect(session[:user_id]).not_to be_nil }
+      it { expect(flash[:info]).not_to be_nil }
+      it { expect(session[:user_id]).to be_nil }
     end
 
     context 'with wrong email' do
