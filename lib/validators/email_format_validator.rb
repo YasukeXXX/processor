@@ -1,6 +1,11 @@
 class EmailFormatValidator < ActiveModel::EachValidator
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   def validate_each(record, attribute, value)
-    record.errors.add attribute, 'must be email format.' unless value.match(VALID_EMAIL_REGEX)
+    record.errors.add attribute, 'must be email format.' unless kawaii_email_address(value).valid?
+  end
+
+  private
+
+  def kawaii_email_address(email)
+    KawaiiEmailAddress::Validator.new(email)
   end
 end
