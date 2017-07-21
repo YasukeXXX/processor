@@ -1,4 +1,9 @@
 class User < ApplicationRecord
   has_secure_password
-  attr_accessor :password, :password_confirmation
+  validates :name, presence: true, length: { maximum: 50 },
+                   name_format: true
+  validates :email, presence: true, length: { maximum: 255 },
+                    uniqueness: { case_sensitive: false },
+                    email_format: true
+  validates :password, presence: true, length: { minimum: 6 }
 end

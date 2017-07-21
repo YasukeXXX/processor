@@ -1,2 +1,24 @@
-%h1 Users#new
-%p Find me in app/views/users/new.html.haml
+- provide(:title, "processor | Sign up")
+%h1 Sign up
+= form_for @user, url: signup_path, html: {class: 'ui form'}do |f|
+  .field
+    = render 'shared/error_messages', object: f.object
+
+  .field
+    = f.label :name
+    = f.text_field :name
+
+  .field
+    = f.label :email
+    = f.email_field :email
+
+  .field
+    = f.label :password
+    = f.password_field :password
+
+  .field
+    = f.label :password_confirmation, "Confirmation"
+    = f.password_field :password_confirmation
+
+  .field
+    = f.submit "Join", class: 'ui submit button'
