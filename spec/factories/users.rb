@@ -6,6 +6,10 @@ FactoryGirl.define do
     password_confirmation 'password'
     account_activation { build :account_activation }
 
+    trait :admin do
+      admin true
+    end
+
     trait :activated do
       after(:create) do |user|
         user.activate

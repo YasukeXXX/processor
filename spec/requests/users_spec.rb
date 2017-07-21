@@ -60,14 +60,97 @@ RSpec.describe "Users", type: :request do
   end
 
   describe '#edit' do
+    let(:user) { create(:user) }
+    let(:other) { create(:user) }
+    before do
+      login_as login_user
+      get edit_user_path(user)
+    end
+
+    subject { response }
+
+    context 'when not logged in' do
+      let(:login_user) { nil }
+      it { is_expected.to redirect_to login_url }
+    end
+
+    context 'when not logged in as wrong user' do
+      let(:login_user) { other }
+      it { is_expected.to redirect_to root_url }
+    end
+
+    context 'when logged in as right user' do
+      let(:login_user) { user }
+      it { is_expected.to be_success }
+      it { is_expected.to render_template 'edit' }
+    end
+  end
+
+  describe '#update' do
+    let(:user) { create(:user, :activated) }
+    let(:other) { create(:user, :activated) }
+    let(:name) { user.name + 'new' }
+    let(:email) { user.email + '.new' }
+    let(:password) { user.password + 'new' }
+    before do
+      login_as login_user
+      patch user_path user, user: { name: name, email: email, password: password }
+      user.reload
+    end
+
+    context 'when not logged in' do
+      let(:login_user) { nil }
+      it { expect(response).to redirect_to login_url }
+      it { expect(user.name).not_to eq name }
+      it { expect(user.email).not_to eq email }
+    end
+
+    context 'when logged in as wrong user' do
+      let(:login_user) { other }
+      it { expect(user.name).not_to eq name }
+      it { expect(user.email).not_to eq email }
+    end
+
+    context 'when logged in as rignt user' do
+      let(:login_user) { user }
+      it { expect(user.name).to eq name }
+      it { expect(user.email).to eq email }
+    end
+  end
+
+  describe '#destroy' do
+    let!(:user) { create(:user, :activated) }
+    let!(:admin_user) { create(:user, :admin, :activated) }
+    before { login_as login_user }
+
+    subject { Proc.new { delete user_path user } }
+
+    context 'when not logged in' do
+      let(:login_user) { nil }
+      it { is_expected.not_to change { User.count } }
+    end
+
+    context 'when logged in as wrong user' do
+      let(:login_user) { user }
+      it { is_expected.not_to change { User.count } }
+    end
+
+    context 'when logged in as admin user' do
+      let(:login_user) { admin_user }
+      it { is_expected.to change { User.count }.by(-1) }
+    end
   end
 
   describe '#show' do
     let(:user) { create(:user) }
-    before { get user_path(user) }
+    before do
+      login_as user
+      get user_path(user)
+    end
+
     subject { response }
 
     it { is_expected.to render_template 'show' }
-    it { expect(response.body).to match /#{user.name}/im }
+    it { expect(response.body).to match /#{user.name}/ }
   end
 end
