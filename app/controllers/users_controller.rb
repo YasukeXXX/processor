@@ -50,7 +50,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.activated_all
+    @users = User.activated_all.page params[:page]
   end
 
   private

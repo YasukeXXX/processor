@@ -9,6 +9,8 @@ class User < ApplicationRecord
 
   has_one :account_activation, dependent: :destroy
 
+  paginates_per 20
+
   def activate
     account_activation.update_attributes(activated: true, activated_at: Time.zone.now)
   end
