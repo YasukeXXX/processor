@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe "PasswordReset", type: :request do
   let(:user) { create(:user, :activated) }
   let(:unactivated_user) { create(:user) }
-  let(:reset_verifier) { Verifier.new type: :reset, expiration_date: 3.hours }
+  let(:expiration) { 3.hours }
+  let(:reset_verifier) { Verifier.new type: :reset, expiration_date: expiration }
 
   describe '#new' do
     before { get new_password_reset_url }
@@ -54,6 +55,11 @@ RSpec.describe "PasswordReset", type: :request do
       let(:token) { "wrong token" }
       it { expect(response).to redirect_to root_url }
     end
+
+    context 'when over expiration' do
+      let(:token) { Rails.application.message_verifier(:reset).generate([user.id, Time.zone.now - 4.hours]) }
+      it { expect(response).to redirect_to root_url }
+    end
   end
 
   describe '#update' do
@@ -89,6 +95,11 @@ RSpec.describe "PasswordReset", type: :request do
 
     context 'with wrong token' do
       let(:token) { "wrong token" }
+      it { expect(response).to redirect_to root_url }
+    end
+
+    context 'when over expiration' do
+      let(:token) { Rails.application.message_verifier(:reset).generate([user.id, Time.zone.now - 4.hours]) }
       it { expect(response).to redirect_to root_url }
     end
 
