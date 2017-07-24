@@ -1,0 +1,18 @@
+- provide(:title, "processor | Reset password")
+%h1 Reset password
+= form_for @user, url: password_reset_path(params[:id]), method: :patch, html: {class: 'ui form'} do |f|
+  .field
+    = render 'shared/error_messages', object: f.object
+
+  = hidden_field_tag :email, @user.email
+
+  .field
+    = f.label :password
+    = f.password_field :password
+
+  .field
+    = f.label :password_confirmation, "Confirmation"
+    = f.password_field :password_confirmation
+
+  .field
+    = f.submit "Update password", class: 'ui submit button'

@@ -9,6 +9,10 @@ class AccountActivation < ApplicationRecord
     activation_verifier.verify(token)
   end
 
+  def activate
+    update_attributes(activated: true, activated_at: Time.zone.now)
+  end
+
   private
 
   def activation_verifier

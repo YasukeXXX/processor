@@ -11,7 +11,7 @@ FactoryGirl.define do
 
     trait :activated do
       after(:create) do |user|
-        user.activate
+        user.account_activation.activate
       end
     end
   end
