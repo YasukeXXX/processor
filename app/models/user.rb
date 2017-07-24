@@ -1,8 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
 
-  attr_accessor :reset_token
-
   validates :name, presence: true, length: { maximum: 50 }, name_format: true
   validates :email, presence: true, length: { maximum: 255 },
                     uniqueness: { case_sensitive: false }, email_format: true
