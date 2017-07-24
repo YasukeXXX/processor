@@ -142,7 +142,7 @@ RSpec.describe "Users", type: :request do
   end
 
   describe '#show' do
-    let(:user) { create(:user) }
+    let(:user) { create(:user, :activated) }
     before do
       login_as user
       get user_path(user)

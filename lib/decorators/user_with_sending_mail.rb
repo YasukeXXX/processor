@@ -4,7 +4,6 @@ class UserWithSendingMail
   end
 
   def save
-    @user.account_activation = account_activation.new
     @user.save && user_mailer.account_activation(@user).deliver_now
   end
 
