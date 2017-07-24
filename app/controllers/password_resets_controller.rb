@@ -9,8 +9,8 @@ class PasswordResetsController < ApplicationController
     @user = User.find_by(email: params[:password_reset][:email].downcase)
     if @user
       flash[:info] = 'Email send with password reset instructions'
-      @user.reset_token = password_reset_verifier.generate_token(@user.id)
-      UserMailer.password_reset(@user).deliver_now
+      @user.reset_token = reset_verifier.generate_token(@user.id)
+      user_mailer.password_reset(@user).deliver_now
       redirect_to root_url
     else
       flash[:error] = 'User account not exists'
@@ -40,8 +40,12 @@ class PasswordResetsController < ApplicationController
     params.require(:user).permit(:password, :password_confirmation)
   end
 
-  def password_reset_verifier
-    @password_reset_verifier ||= Verifier.new type: :reset, expiration_date: 3.hours
+  def reset_verifier
+    @reset_verifier ||= Verifier.new type: :reset, expiration_date: 3.hours
+  end
+
+  def user_mailer
+    UserMailer
   end
 
   def get_user
@@ -49,7 +53,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def valid_user
-    unless @user && @user.account_activation.activated? && password_reset_verifier.verify(params[:id])
+    unless @user && @user.account_activation.activated? && reset_verifier.verify(params[:id])
       redirect_to root_url
     end
   end
