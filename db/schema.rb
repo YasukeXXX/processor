@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170721064429) do
+ActiveRecord::Schema.define(version: 20170725044818) do
 
   create_table "account_activations", force: :cascade do |t|
     t.integer "user_id"
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(version: 20170721064429) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false
+  end
+
+  create_table "videos", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "path"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

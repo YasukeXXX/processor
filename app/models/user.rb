@@ -7,6 +7,7 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }
 
   has_one :account_activation, dependent: :destroy
+  has_many :videos, dependent: :destroy
 
   before_create :build_account_activation
 
