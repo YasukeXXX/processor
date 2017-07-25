@@ -2,13 +2,24 @@ require 'rails_helper'
 
 RSpec.describe "Video", type: :request do
   let(:user) { create(:user, :activated) }
+  let(:video) { fixture_file_upload 'spec/fixtures/video/sample.MOV', 'video/MOV' }
 
   describe '#create' do
-    context 'when video upload' do
-      let(:video) { fixture_file_upload 'spec/fixtures/video/sample.MOV', 'video/MOV' }
-      subject { Proc.new { post videos_path user.id, video: { video: video } } }
+    before do
+      login_as login_user
+      post videos_path user.id, video: { video: video }
+    end
 
-      it { is_expected.to change { Video.count }.by(1) }
+    context 'when login' do
+      let(:login_user) { user }
+      # subject { Proc.new { post videos_path user.id, video: { video: video } } }
+      # it { is_expected.to change { Video.count }.by(1) }
+      it { expect(response).not_to redirect_to login_url }
+    end
+
+    context 'when not logged in' do
+      let(:login_user) { nil }
+      it { expect(response).to redirect_to login_url }
     end
   end
 end
