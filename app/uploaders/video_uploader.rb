@@ -16,7 +16,7 @@ class VideoUploader < CarrierWave::Uploader::Base
   def return_path_after_store(file)
     @store_dir = "videos/" + SecureRandom.urlsafe_base64
     store!(file)
-    File.join(['public', store_path])
+    File.join ['public', store_path]
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -42,7 +42,7 @@ class VideoUploader < CarrierWave::Uploader::Base
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_whitelist
-    %w(jpg jpeg gif png MOV wmv)
+    %w(mp4 MOV wmv)
   end
 
   # Override the filename of the uploaded files:

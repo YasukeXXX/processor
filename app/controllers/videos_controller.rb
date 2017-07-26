@@ -12,7 +12,7 @@ class VideosController < ApplicationController
 
   def show
     @user = User.find(params[:user_id])
-    @video = @user.videos.find(parms[:id])
+    @video = @user.videos.find(params[:id])
   end
 
   private

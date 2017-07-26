@@ -3,4 +3,8 @@ class Video < ApplicationRecord
 
   belongs_to :user
   has_many :fragments, dependent: :destroy
+
+  def videos_id
+    File.join(path.split('/').slice(2..-1))
+  end
 end

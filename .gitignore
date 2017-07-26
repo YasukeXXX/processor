@@ -16,7 +16,8 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-public/uploads/*
+/public/uploads/*
+/public/videos/*
 
 /node_modules
 /yarn-error.log
