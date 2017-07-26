@@ -5,9 +5,14 @@ class VideosController < ApplicationController
   end
 
   def create
-    @user = User.find_by(id: params[:id])
+    @user = User.find_by(id: params[:user_id])
     params[:video][:path] = uploader.return_path_after_store(params[:video][:video])
-    @user.videos.create(video_params)
+    @user.videos.create!(video_params)
+  end
+
+  def show
+    @user = User.find(params[:user_id])
+    @video = @user.videos.find(parms[:id])
   end
 
   private
