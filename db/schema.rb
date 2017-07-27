@@ -12,8 +12,11 @@
 
 ActiveRecord::Schema.define(version: 20170726102155) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "account_activations", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.boolean "activated", default: false
     t.datetime "activated_at"
     t.datetime "created_at", null: false
@@ -32,12 +35,12 @@ ActiveRecord::Schema.define(version: 20170726102155) do
 
   create_table "procedures", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "fragment_ids"
+    t.integer "fragment_ids", array: true
     t.string "title"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["fragment_ids"], name: "index_procedures_on_fragment_ids"
+    t.index ["fragment_ids"], name: "index_procedures_on_fragment_ids", using: :gin
   end
 
   create_table "users", force: :cascade do |t|
