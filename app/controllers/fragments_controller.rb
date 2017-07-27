@@ -15,12 +15,20 @@ class FragmentsController < ApplicationController
 
   def update
     @fragment = @user.fragments.find(params[:id])
-    @fragment.update_attributes(fragment_params)
+    if @fragment.update_attributes(fragment_params)
+      flash[:success] = 'Fragment updated!'
+    else
+      flash[:error] = 'Fragment update failed'
+    end
   end
 
   def destroy
     @fragment = @user.fragments.find(params[:id])
-    @fragment.destroy
+    if @fragment.destroy
+      flash[:success] = 'Fragment deleted!'
+    else
+      flash[:error] = 'Fragment delete failed'
+    end
   end
 
   private
