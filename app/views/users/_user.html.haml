@@ -1,0 +1,6 @@
+= link_to user.name, user
+.ui
+  .li
+    - if current_user.admin?
+      |
+      = link_to 'delete', user, method: :delete, data: {confirm: "You sure?"}

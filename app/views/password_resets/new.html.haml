@@ -1,0 +1,10 @@
+- provide(:title, 'Forgot password')
+.ui.header
+  Forgot password
+= form_for :password_reset, url: password_resets_path, html: { class: 'ui form' } do |f|
+  .field
+    = f.label :email
+    = f.email_field :email
+
+  .field
+    = f.submit "Submit", class: 'ui submit button'

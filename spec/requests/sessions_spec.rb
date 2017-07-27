@@ -13,7 +13,11 @@ RSpec.describe "Sessions", type: :request do
   describe '#create' do
     let(:email) { user.email }
     let(:password) { user.password }
-    before { post login_path, params: { session: { email: email, password: password } } }
+    let(:remember_me) { '0' }
+    before do
+      post login_path, params: { session: { email: email, password: password,
+                                            remember_me: remember_me } }
+    end
 
     subject { session[:user_id] }
 
@@ -33,6 +37,17 @@ RSpec.describe "Sessions", type: :request do
       it { is_expected.to be_nil }
       it { expect(flash[:error]).not_to be_empty }
       it { expect(response).to render_template 'new' }
+    end
+
+    context 'with remember me' do
+      let(:remember_me) { '1' }
+      before do
+        session.delete(:user_id)
+        get root_path
+      end
+
+      it { expect(response.body).to match /#{user.name}/im }
+      it { expect(response.body).not_to match /Login/im }
     end
   end
 

@@ -1,0 +1,6 @@
+Hi #{@user.name}
+
+Welcome to processor!
+Click on the link and activate your account!
+
+= link_to "Activate", edit_account_activation_url(@user.account_activation.token, email: @user.email)
