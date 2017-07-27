@@ -32,6 +32,7 @@ group :development, :test do
   gem 'haml-lint', require: false
   gem 'pry-rails'
   gem 'rails-controller-testing'
+  gem 'rspec'
   gem 'rspec-rails'
   gem 'rubocop', require: false
   gem 'selenium-webdriver', '3.4.3'

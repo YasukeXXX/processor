@@ -9,7 +9,7 @@ RSpec.describe "Searches", type: :request do
 
     context 'when search title' do
       let(:keyword) { fragment.title }
-      # it { expect(assigns(:fragment)).to include fragment }
+      it { expect(assigns(:fragments)).to include fragment }
       it { expect(response).not_to redirect_to root_url }
     end
   end
