@@ -7,3 +7,4 @@ machine:
 test:
   override:
     - bundle exec haml-lint -c .halm-lint.yml app/*
+    - bundle exec rspec
