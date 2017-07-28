@@ -10,11 +10,11 @@ User.create(name: "example",
             email: "admin@example.com",
             password: "password",
             password_confirmation: "password",
-            admin: true).create_account_activation(activated: true)
+            admin: true).account_activation.update_attributes(activated: true)
 
 99.times do |n|
   User.create(name: "example#{n}",
               email: "example#{n}@example.com",
               password: "password",
-              password_confirmation: "password").create_account_activation(activated: true)
+              password_confirmation: "password").account_activation.update_attributes(activated: true)
 end
