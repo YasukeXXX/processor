@@ -7,7 +7,10 @@ class FragmentsController < ApplicationController
   end
 
   def create
-    @user.fragments.create(fragment_params)
+    @fragment = @user.fragments.create(fragment_params)
+    response_to do |format|
+      format.js
+    end
   end
 
   def edit
