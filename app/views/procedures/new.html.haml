@@ -7,7 +7,7 @@
 
   #flow
 
-  #tab.field.ui.top.attached.tabular.menu
+  .field.ui.top.attached.tabular.menu#tab
     %a.active.item{ 'data-tab' => "search" }
       Search fragments
     %a.item{ 'data-tab' => "upload" }
@@ -19,14 +19,14 @@
       .field
         = f_fragment.label :title
         = f_fragment.text_field :title
-  
+
         = f_fragment.label :video
         = f_fragment.file_field :video, accept: 'video/*'
-  
+
       .field
         = f_fragment.label :description
         = f_fragment.text_area :description
-  
+
       .field
         = f_fragment.submit "Upload", class: 'ui submit button'
 
