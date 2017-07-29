@@ -1,1 +1,2 @@
-$("#flow").html('#{video_tag(@fragment.video.videos_id, autoplay: false, muted: true, controls: true, preload: true)}')
+$("#procedure_fragment_ids").val("#{session[:selected_fragments]}")
+$("#flow .ui.segments").html("#{escape_javascript(render(partial: 'procedures/selected_fragment', collection: @selected_fragments, as: :selected_fragment))}")

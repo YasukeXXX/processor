@@ -5,31 +5,37 @@
     = f.label :title
     = f.text_field :title
 
-  #flow
+  #flow.field
+    = f.hidden_field :fragment_ids, value: session[:selected_fragments]
+    .ui.segments
+      = render partial: 'selected_fragment', collection: @selected_fragments, as: :selected_fragment
 
-  .field.ui.top.attached.tabular.menu#tab
-    %a.active.item{ 'data-tab' => "search" }
-      Search fragments
-    %a.item{ 'data-tab' => "upload" }
-      Upload your video
-  .ui.bottom.attached.active.tab.segment{ 'data-tab' => "search" }
-    Search fragment
-  .ui.bottom.attached.tab.segment{ 'data-tab' => "upload" }
-    = fields_for @fragment, url: user_fragments_path(current_user.id), remote: true, html: {class: 'ui form'} do |f_fragment|
-      .field
-        = f_fragment.label :title
-        = f_fragment.text_field :title
+.field.ui.top.attached.tabular.menu#tab
+  %a.active.item{ 'data-tab' => "search" }
+    Search fragments
+  %a.item{ 'data-tab' => "upload" }
+    Upload your video
+.ui.bottom.attached.active.tab.segment{ 'data-tab' => "search" }
+  Search fragment
+.ui.bottom.attached.tab.segment{ 'data-tab' => "upload" }
+  = form_for @fragment, url: user_fragments_path(current_user.id), remote: true, html: {class: 'ui form'} do |f_fragment|
+    .field
+      = f_fragment.label :title
+      = f_fragment.text_field :title
 
-        = f_fragment.label :video
-        = f_fragment.file_field :video, accept: 'video/*'
+      = f_fragment.label :video
+      = f_fragment.file_field :video, accept: 'video/*'
 
-      .field
-        = f_fragment.label :description
-        = f_fragment.text_area :description
+      = f_fragment.hidden_field :video_id, value: 1
 
-      .field
-        = f_fragment.submit "Upload", class: 'ui submit button'
+    .field
+      = f_fragment.label :description
+      = f_fragment.text_area :description
 
+    .field
+      = f_fragment.submit "Upload", class: 'ui submit button'
+
+= form_for @procedure, url: procedures_path, html: {class: 'ui form'} do |f|
   .field
     = f.label :description
     = f.text_area :description

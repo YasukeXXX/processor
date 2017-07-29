@@ -8,7 +8,10 @@ class FragmentsController < ApplicationController
 
   def create
     @fragment = @user.fragments.create(fragment_params)
-    response_to do |format|
+    session[:selected_fragments] ||= []
+    session[:selected_fragments] << @fragment.id
+    @selected_fragments = Fragment.where(id: session[:selected_fragments])
+    respond_to do |format|
       format.js
     end
   end
