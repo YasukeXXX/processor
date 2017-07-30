@@ -5,7 +5,7 @@ RSpec.describe "Searches", type: :request do
   let(:video)  { create(:video, user_id: user.id) }
   let(:fragment) { create(:fragment, user_id: user.id, video_id: video.id) }
   describe '#index' do
-    before { get search_index_url user.id, keyword: keyword }
+    before { get search_index_url user.id, keyword: keyword, format: :js }
 
     context 'when search title' do
       let(:keyword) { fragment.title }

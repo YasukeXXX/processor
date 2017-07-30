@@ -1,14 +1,9 @@
 - provide(:title, "processor | Post process")
 %h1 Post your process
-= form_for @procedure, url: procedures_path, html: {class: 'ui form'} do |f|
+= form_for @procedure, url: procedures_path, remote: true, html: {class: 'ui form'} do |f|
   .field
     = f.label :title
     = f.text_field :title
-
-  #flow.field
-    = f.hidden_field :fragment_ids, value: session[:selected_fragments]
-    .ui.segments
-      = render partial: 'selected_fragment', collection: @selected_fragments, as: :selected_fragment
 
 .field.ui.top.attached.tabular.menu#tab
   %a.active.item{ 'data-tab' => "search" }
@@ -16,26 +11,39 @@
   %a.item{ 'data-tab' => "upload" }
     Upload your video
 .ui.bottom.attached.active.tab.segment{ 'data-tab' => "search" }
-  Search fragment
+  = form_tag search_index_path, method: :get, remote: true, class: 'ui form grid' do
+    .four.wide.column
+      = text_field_tag :keyword, '',  placeholder: 'Search'
+    .two.wide.column
+      = button_tag 'Search', class: 'ui submit button'
+  #search_results
+    Results
+    .ui.segments
 .ui.bottom.attached.tab.segment{ 'data-tab' => "upload" }
-  = form_for @fragment, url: user_fragments_path(current_user.id), remote: true, html: {class: 'ui form'} do |f_fragment|
+  = form_for @fragment, url: user_fragments_path(current_user.id), remote: true, html: {class: 'ui form'} do |f|
     .field
-      = f_fragment.label :title
-      = f_fragment.text_field :title
+      = f.label :title
+      = f.text_field :title
 
-      = f_fragment.label :video
-      = f_fragment.file_field :video, accept: 'video/*'
+      = f.label :video
+      = f.file_field :video, accept: 'video/*'
 
-      = f_fragment.hidden_field :video_id, value: 1
-
-    .field
-      = f_fragment.label :description
-      = f_fragment.text_area :description
+      = f.hidden_field :video_id, value: 1
 
     .field
-      = f_fragment.submit "Upload", class: 'ui submit button'
+      = f.label :description
+      = f.text_area :description
+
+    .field
+      = f.submit "Upload", class: 'ui submit button'
 
 = form_for @procedure, url: procedures_path, html: {class: 'ui form'} do |f|
+  #flow.field
+    = f.label :fragment_ids, 'Selected fragments'
+    = f.hidden_field :fragment_ids, value: session[:selected_fragments]
+    .ui.stacked.segments
+      = render partial: 'selected_fragment', collection: @selected_fragments, as: :selected_fragment
+
   .field
     = f.label :description
     = f.text_area :description

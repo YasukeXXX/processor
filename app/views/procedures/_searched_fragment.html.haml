@@ -1,0 +1,9 @@
+.ui.segment
+  .ui.grid
+    .five.wide.column
+      = video_tag(fragment.video.videos_id, autoplay: false, muted: true, controls: true, preload: true, width: '100%')
+    .five.wide.column
+      .field
+        = fragment.title
+      .field
+        = fragment.description
