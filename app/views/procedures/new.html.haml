@@ -16,7 +16,7 @@
       = text_field_tag :keyword, '',  placeholder: 'Search'
     .two.wide.column
       = button_tag 'Search', class: 'ui submit button'
-  #search_results
+  #search-results
     Results
     .ui.segments
 .ui.bottom.attached.tab.segment{ 'data-tab' => "upload" }
@@ -38,7 +38,7 @@
       = f.submit "Upload", class: 'ui submit button'
 
 = form_for @procedure, url: procedures_path, html: {class: 'ui form'} do |f|
-  #flow.field
+  .field#flow
     = f.label :fragment_ids, 'Selected fragments'
     = f.hidden_field :fragment_ids, value: session[:selected_fragments]
     .ui.stacked.segments
