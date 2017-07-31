@@ -25,10 +25,8 @@
       = f.label :title
       = f.text_field :title
 
-      = f.label :video
-      = f.file_field :video, accept: 'video/*'
-
-      = f.hidden_field :video_id, value: 1
+      = f.label :uncreated_video, 'Video'
+      = f.file_field :uncreated_video, accept: 'video/*'
 
     .field
       = f.label :description

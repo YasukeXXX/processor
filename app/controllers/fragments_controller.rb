@@ -32,7 +32,7 @@ class FragmentsController < ApplicationController
   private
 
   def fragment_params
-    params.require(:fragment).permit(:video_id, :title, :description)
+    params.require(:fragment).permit(:video_id, :title, :description, :uncreated_video)
   end
 
   def set_user

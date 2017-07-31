@@ -6,7 +6,7 @@ class Video < ApplicationRecord
 
   attr_accessor :video
 
-  after_initialize :upload_video
+  before_validation :upload_video
 
   def videos_id
     File.join(path.split('/').slice(2..-1))
@@ -15,7 +15,7 @@ class Video < ApplicationRecord
   private
 
   def upload_video
-    self.path = uploader.return_path_after_store(video)
+    self.path = uploader.return_path_after_store(video) unless path
   end
 
   def uploader
