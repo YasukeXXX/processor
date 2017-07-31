@@ -1,5 +1,10 @@
 - provide(:title, "processor")
-.ui.text.container.center.aligned
-  %h1.ui.header
-    Welcome to processor
-  = link_to " Sign up now", signup_path, class: "ui huge black button"
+- if logged_in?
+  .ui.padded.grid
+    .four.wide.column
+      = link_to "Upload Your Process", new_procedure_path, class: "ui huge black button"
+- else
+  .ui.text.container.center.aligned
+    %h1.ui.header
+      Welcome to processor
+    = link_to " Sign up now", signup_path, class: "ui huge black button"

@@ -34,6 +34,8 @@
   #search-results
     Results
     .ui.segments
+      .ui.segment
+        No Result
 .ui.bottom.attached.tab.segment{ 'data-tab' => "upload" }
   = form_for @fragment, url: user_fragments_path(current_user.id), remote: true, html: {class: 'ui form'} do |f|
     .field

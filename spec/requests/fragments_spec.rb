@@ -34,7 +34,8 @@ RSpec.describe "Fragments", type: :request do
       Proc.new do
         post user_fragments_url user_id, fragment: { video_id: video.id,
                                                      title: title,
-                                                     description: description }
+                                                     description: description },
+                                         format: :js
       end
     end
 
