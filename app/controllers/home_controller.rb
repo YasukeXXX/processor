@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index
     if logged_in?
-      @procedure = current_user.procedures.build
+      @procedures = current_user.procedures
     end
   end
 end

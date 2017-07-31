@@ -7,11 +7,26 @@ class ProceduresController < ApplicationController
   end
 
   def create
+    @procedure = current_user.procedures.build(procedure_params)
+    @procedure.fragment_ids = session[:selected_fragments]
+    if @procedure.save
+      flash[:success] = 'Process uploaded'
+      redirect_to root_url
+    else
+      flash[:error] = 'Process upload failed'
+      render 'new'
+    end
   end
 
   def edit
   end
 
   def update
+  end
+
+  private
+
+  def procedure_params
+    params.require(:procedure).permit(:title, :fragment_ids, :description)
   end
 end

@@ -1,9 +1,24 @@
 - provide(:title, "processor | Post process")
 %h1 Post your process
-= form_for @procedure, url: procedures_path, remote: true, html: {class: 'ui form'} do |f|
+= form_for @procedure, url: procedures_path, html: {class: 'ui form'} do |f|
   .field
     = f.label :title
     = f.text_field :title
+
+  .field#flow
+    = f.label :fragment_ids, 'Selected fragments'
+    = f.hidden_field :fragment_ids, value: session[:selected_fragments]
+    .ui.stacked.segments
+      .ui.segment
+        Upload or Search Fragment
+      = render partial: 'selected_fragment', collection: @selected_fragments, as: :selected_fragment
+
+  .field
+    = f.label :description
+    = f.text_area :description
+
+  .field
+    = f.submit "Post", class: 'ui submit button'
 
 .field.ui.top.attached.tabular.menu#tab
   %a.active.item{ 'data-tab' => "search" }
@@ -34,17 +49,3 @@
 
     .field
       = f.submit "Upload", class: 'ui submit button'
-
-= form_for @procedure, url: procedures_path, html: {class: 'ui form'} do |f|
-  .field#flow
-    = f.label :fragment_ids, 'Selected fragments'
-    = f.hidden_field :fragment_ids, value: session[:selected_fragments]
-    .ui.stacked.segments
-      = render partial: 'selected_fragment', collection: @selected_fragments, as: :selected_fragment
-
-  .field
-    = f.label :description
-    = f.text_area :description
-
-  .field
-    = f.submit "Post", class: 'ui submit button'
