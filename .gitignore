@@ -19,6 +19,7 @@
 !/tmp/.keep
 /public/uploads/*
 /public/videos/*
+/coverage/
 
 /node_modules
 /yarn-error.log
