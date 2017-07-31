@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Procedure, type: :model do
   let(:user) { create(:user, :activated) }
   let(:user_id) { user.id }
-  let(:fragment_ids) { [create(:fragment)] * 5 }
+  let(:fragment_ids) { [create(:fragment).id] * 5 }
   let(:title) { 'test title' }
   let(:description) { 'test description' }
 
@@ -35,5 +35,19 @@ RSpec.describe Procedure, type: :model do
       let(:description) { ' ' }
       it { is_expected.to be_truthy }
     end
+  end
+
+  describe '#fragments' do
+    let(:procedure) do
+      create :procedure,
+             user_id: user_id,
+             fragment_ids: fragment_ids,
+             title: title,
+             description: description
+    end
+
+    subject { procedure.fragments }
+
+    it { is_expected.to eq Fragment.where(id: fragment_ids) }
   end
 end

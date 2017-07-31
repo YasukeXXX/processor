@@ -6,6 +6,6 @@ class Procedure < ApplicationRecord
   belongs_to :user
 
   def fragments
-    Fragment.where(id: fragments_ids)
+    Fragment.where(id: fragment_ids)
   end
 end

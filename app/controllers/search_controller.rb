@@ -1,4 +1,6 @@
 class SearchController < ApplicationController
+  protect_from_forgery except: :index
+
   def index
     if params[:keyword]
       search_form = FragmentSearchForm.new(keyword: params[:keyword])
