@@ -6,6 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'bcrypt'
+gem 'carrierwave'
 gem 'coffee-rails', '~> 4.2'
 gem 'haml-rails'
 gem 'jbuilder', '~> 2.5'
@@ -19,6 +20,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'semantic-ui-sass', git: 'https://github.com/doabit/semantic-ui-sass.git'
 gem 'sqlite3'
 gem 'sshkit', '1.9.0'
+gem 'streamio-ffmpeg'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 

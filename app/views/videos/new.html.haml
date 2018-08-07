@@ -1,0 +1,8 @@
+%h1 Videos#new
+= form_for :video, url: user_videos_path, html: { class: 'ui form' } do |f|
+  .field
+    = f.label :video
+    = f.file_field :video, accept: 'video/*'
+
+  .field
+    = f.submit "Submit", class: 'ui submit button'
